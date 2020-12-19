@@ -1,22 +1,32 @@
 package org.ok.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Entry {
 
-    public Entry(int id, String name, String surname, String blood, String phone, String address) {
-        this.id = id;
-        this.name = name;
-        this.surname = surname;
-        this.blood = blood;
-        this.phone = phone;
-        this.address = address;
-    }
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String surname;
     private String blood;
     private String phone;
     private String address;
+
+    public Entry() {
+    }
+
+    public Entry(String name, String surname, String blood, String phone, String address) {
+        this.name = name;
+        this.surname = surname;
+        this.blood = blood;
+        this.phone = phone;
+        this.address = address;
+    }
 
     public int getId() {
         return id;

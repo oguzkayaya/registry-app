@@ -18,7 +18,7 @@ public class SaveController extends AbstractController {
 
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        Entry newEntry = new Entry(1,
+        Entry newEntry = new Entry(
                 request.getParameter("name"),
                 request.getParameter("surname"),
                 request.getParameter("blood"),
