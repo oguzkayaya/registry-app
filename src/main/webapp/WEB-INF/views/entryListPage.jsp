@@ -9,7 +9,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 	<jsp:include page="header.jsp" />
 	Tüm kayitlar
-	${ entries }
+	<c:forEach items="${entryList}" var="entry">
+    		<p>Entry:${entry.id} - ${entry.name} - ${entry.surname} - ${entry.blood} - ${entry.phone} - ${entry.address}</p>
+    	</c:forEach>
 	<jsp:include page="footer.jsp" />
 </body>
 </html>

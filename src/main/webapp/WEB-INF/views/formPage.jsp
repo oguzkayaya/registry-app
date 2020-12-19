@@ -12,19 +12,19 @@
 		<div class="form">
 			<form action="save" method="POST">
 				<div class="formGroup">
-					<label> Isim </label> <input type="text" name="isim">
+					<label> Isim </label> <input type="text" name="name">
 				</div>
 				<div class="formGroup">
-					<label> Soyisim </label> <input type="text" name="soyisim">
+					<label> Soyisim </label> <input type="text" name="surname">
 				</div>
 				<div class="formGroup">
-					<label> Kan Grubu </label> <input type="text" name="kan">
+					<label> Kan Grubu </label> <input type="text" name="blood">
 				</div>
 				<div class="formGroup">
-					<label> Telefon </label> <input type="text" name="telefon">
+					<label> Telefon </label> <input type="text" name="phone">
 				</div>
 				<div class="formGroup">
-					<label> Adres </label> <input type="text" name="adres">
+					<label> Adres </label> <input type="text" name="address">
 				</div>
 				<div class="formGroup">
 					<input class="btn" type="submit" value="Kaydet">

@@ -33,9 +33,15 @@
     </bean>
     <bean name="/save" class="org.ok.controller.SaveController">
         <property name="supportedMethods" value="POST"></property>
+        <constructor-arg ref="entryService"></constructor-arg>
     </bean>
     <bean name="/all" class="org.ok.controller.GetEntriesController">
         <property name="supportedMethods" value="GET"></property>
+        <constructor-arg ref="entryService"></constructor-arg>
+    </bean>
+
+    <!-- Services -->
+    <bean id="entryService" class="org.ok.service.EntryService">
     </bean>
 
 
