@@ -4,6 +4,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 
        xsi:schemaLocation="
         http://www.springframework.org/schema/beans
@@ -15,7 +16,9 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
         http://www.springframework.org/schema/data/jpa
-        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+        http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+        http://www.springframework.org/schema/jdbc
+        http://www.springframework.org/schema/jdbc/spring-jdbc.xsd">
 
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -56,6 +59,21 @@
     </bean>
 
 
+    <!-- Use in-memory embedded H2 database -->
+    <jdbc:embedded-database id="dataSource" type="H2">
+    </jdbc:embedded-database>
+
+    <!-- Run H2 web server within application that will access the same in-memory database -->
+    <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer" init-method="start"
+          destroy-method="stop" depends-on="h2WebServer">
+        <constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092"/>
+    </bean>
+    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" init-method="start"
+          destroy-method="stop">
+        <constructor-arg value="-web,-webAllowOthers,-webPort,8082"/>
+    </bean>
+
+
     <!-- This produces a container-managed EntityManagerFactory; rather than
          application-managed EntityManagerFactory as in case of LocalEntityManagerFactoryBean -->
     <bean id="entityManagerFactoryBean"
@@ -72,7 +90,7 @@
             <props>
                 <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
-                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
             </props>
         </property>
     </bean>
@@ -80,15 +98,17 @@
 
     <!-- Simple implementation of the standard JDBC DataSource interface, configuring
          the plain old JDBC DriverManager via bean properties -->
-    <bean id="dataSource"
-          class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName"
-                  value="com.mysql.jdbc.Driver"/>
-        <property name="url"
-                  value="jdbc:mysql://localhost:3306/registry?serverTimezone=UTC"/>
-        <property name="username" value="root"/>
-        <property name="password" value="1234"/>
-    </bean>
+    <!--
+ <bean id="dataSource"
+       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+     <property name="driverClassName"
+               value="com.mysql.jdbc.Driver"/>
+     <property name="url"
+               value="jdbc:mysql://localhost:3306/registry?serverTimezone=UTC"/>
+     <property name="username" value="root"/>
+     <property name="password" value="1234"/>
+ </bean>
+ -->
 
 
     <!-- This transaction manager is appropriate for applications that use a
