@@ -63,17 +63,18 @@
     <jdbc:embedded-database id="dataSource" type="H2">
     </jdbc:embedded-database>
 
-    <!-- Run H2 web server within application that will access the same in-memory database -->
-    <bean id="h2Server" class="org.h2.tools.Server" factory-method="createTcpServer" init-method="start"
-          destroy-method="stop" depends-on="h2WebServer">
-        <constructor-arg value="-tcp,-tcpAllowOthers,-tcpPort,9092"/>
-    </bean>
-    <bean id="h2WebServer" class="org.h2.tools.Server" factory-method="createWebServer" init-method="start"
-          destroy-method="stop">
-        <constructor-arg value="-web,-webAllowOthers,-webPort,8082"/>
-    </bean>
 
-
+    <!-- Use MySQL database
+        <bean id="dataSource"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+            <property name="driverClassName"
+                      value="com.mysql.jdbc.Driver"/>
+            <property name="url"
+                      value="jdbc:mysql://<database-schema-url>"/>
+            <property name="username" value="<username>"/>
+            <property name="password" value="<password>"/>
+        </bean>
+   -->
     <!-- This produces a container-managed EntityManagerFactory; rather than
          application-managed EntityManagerFactory as in case of LocalEntityManagerFactoryBean -->
     <bean id="entityManagerFactoryBean"
@@ -88,28 +89,12 @@
         </property>
         <property name="jpaProperties">
             <props>
-                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.show_sql">false</prop>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.H2Dialect</prop>
             </props>
         </property>
     </bean>
-
-
-    <!-- Simple implementation of the standard JDBC DataSource interface, configuring
-         the plain old JDBC DriverManager via bean properties -->
-    <!--
- <bean id="dataSource"
-       class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-     <property name="driverClassName"
-               value="com.mysql.jdbc.Driver"/>
-     <property name="url"
-               value="jdbc:mysql://localhost:3306/registry?serverTimezone=UTC"/>
-     <property name="username" value="root"/>
-     <property name="password" value="1234"/>
- </bean>
- -->
-
 
     <!-- This transaction manager is appropriate for applications that use a
           single JPA EntityManagerFactory for transactional data access. JTA (usually
