@@ -10,11 +10,11 @@ Uygulama içinde Tomcat Maven plugin'i kullanılmıştır. Maven ile komut satı
 Github'dan clone edip, maven ile çalıştırmak için:
 > \>git clone https://github.com/oguzkayaya/registry-app.git
 >
-> \>cd cd registry-app/\
+> \>cd registry-app/
 >
 > \>mvn clean install tomcat7:run
 
->http://localhost:8091/
+<a href="http://localhost:8091/" target="_blank">>http://localhost:8091/</a>
 
 <br/>
 <br/>
