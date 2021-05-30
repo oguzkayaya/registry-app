@@ -24,5 +24,4 @@ Github'dan clone edip, maven ile çalıştırmak için:
 - Veritabanı olarak embeded ve in-memory bir veritabanı olan H2'yi kullanır. (Mysql ile çalıştırmak isterseniz *"dispatcher-servlet.xml"* içindeki Mysql için olan bean'in yorum satırını kaldırıp Mysql schema'ına erişim için olan property'lere gerekli değerleri girmeniz gerekecektir.)
 - Olabildiğince Xml konfigürasyonları kullanılmıştır. Url'lerin Controller'lara map edilmesi, Service gibi bean'ların oluşturulması, Jpa Hibernate ve veritabanı ayarı gibi işlemler için xml ayar dosyaları kullanılmıştır.
 
-Oğuz Kaya
 
