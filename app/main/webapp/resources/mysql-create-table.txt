@@ -1,0 +1,8 @@
+CREATE TABLE `registry`.`entry` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NULL,
+  `surname` VARCHAR(255) NULL,
+  `blood` VARCHAR(255) NULL,
+  `phone` VARCHAR(255) NULL,
+  `address` VARCHAR(255) NULL,
+  PRIMARY KEY (`id`));
