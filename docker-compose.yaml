@@ -1,0 +1,7 @@
+version: '3.8'
+services:
+  app:
+    build: ./app
+    container_name: app_container
+    ports:
+      - '8091:8091'
